@@ -5,10 +5,10 @@ const {
     deleteUser,
     getUsers,
     modifyUser
-} = require('../controllers/users.controllers')
+} = require('../services.mocked/users.mocked.service')
 
-router.post('/users/addUser', addUsers );
-router.delete('/users/deleteUser', deleteUser);
-router.get('/users/getUsers', getUsers);
-router.put('/users/modifyUser', modifyUser);
+router.post('/users', addUsers );
+router.delete('/users', deleteUser);
+router.get('/users', getUsers);
+router.put('/users', modifyUser);
 module.exports = router;

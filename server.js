@@ -21,9 +21,9 @@ app.use(bodyParser.json())
 
 app.set("port", process.env.PORT || 8080);
 
-app.get("/", (req, res) => {
-  res.send("Amiga, funciona, fuaaaa");
-});
+// app.get("/", (req, res) => {
+//   res.send("Amiga, funciona, fuaaaa");
+// });
 
 app.use(require("./routes/users.routes"));
 
