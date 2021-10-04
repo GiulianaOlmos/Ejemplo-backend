@@ -25,6 +25,6 @@ app.set("port", process.env.PORT || 8080);
 //   res.send("Amiga, funciona, fuaaaa");
 // });
 
-app.use(require("./routes/users.routes"));
+app.use(require("./routes/players.routes"));
 
 module.exports = app;

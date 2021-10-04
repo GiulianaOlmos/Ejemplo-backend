@@ -1,5 +1,5 @@
 const userCtrl = {};
-const User = require('../models/user')
+const User = require('../models/player')
 
 userCtrl.addUsers = async (req, res) => {
     let {playerName, team, score } = req.body
