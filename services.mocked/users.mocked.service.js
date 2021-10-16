@@ -1,7 +1,7 @@
 const users = require('../models.mocked/user.mocked')
 const usersServiceMocked = {};
 
-// EJEMPLOS
+// EJEmPLOS
 usersServiceMocked.add = async (req, res) => {
     try {
         console.log('+++++++++++++++++++++++++++++++++++');
@@ -17,6 +17,7 @@ usersServiceMocked.add = async (req, res) => {
         console.log('newUser', newUser);
         // validaciones de inputs, ejemplos
         // validaciones de negocio, ejemplos edad minima.
+        // ¿cómo genero el id? con BD no va a ser necesario
         newUser.id = users.sort((u1, u2) => u2.id - u1.id).id + 1; // users.lenth + 1 y esta forma?
         console.log('newUser', newUser);
         users.push(newUser);
@@ -38,6 +39,7 @@ usersServiceMocked.modify = (req, res) => {
             return res.status(400).json({ mesaage: 'Invalid user.' });
         // validaciones de inputs antes de asignar valores al objeto: req.body.name
         // validaciones de negocio
+        // SOLO ACTUALIZO LOS DATOS PERMITOS A SER MODIFICADOS
         user.name = req.body.name; //asignacion previamente validados
         user.age = req.body.age;
         console.log('user updated', user);
@@ -50,7 +52,9 @@ usersServiceMocked.modify = (req, res) => {
 
 usersServiceMocked.get = (req, res) => {
     res.json(users);
+    // HACER parte con filtros: limit
 }
+
 
 usersServiceMocked.getUser = (req, res) => {
     console.log('+++++++++++++++++++++++++++++++++++');
