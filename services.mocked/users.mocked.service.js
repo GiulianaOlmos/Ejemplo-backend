@@ -11,14 +11,19 @@ usersServiceMocked.add = async (req, res) => {
             password: req.body.password,
             name: req.body.name,
             age: +req.body.age,
-            active: true
+            id: +req.body.id
         }
-        console.log('users length', newUser.length);
+        var encontrado = users.find(u=>u.id == newUser.id);
+        console.log('encontrado', encontrado)
+        if(encontrado)
+        {
+            return res.status(400).json();
+        }
         console.log('newUser', newUser);
         // validaciones de inputs, ejemplos
         // validaciones de negocio, ejemplos edad minima.
         // ¿cómo genero el id? con BD no va a ser necesario
-        newUser.id = users.sort((u1, u2) => u2.id - u1.id).id + 1; // users.lenth + 1 y esta forma?
+        //newUser.id = users.sort((u1, u2) => u2.id - u1.id).id + 1; // users.lenth + 1 y esta forma?
         console.log('newUser', newUser);
         users.push(newUser);
         console.log('users length', newUser.length);
@@ -30,6 +35,32 @@ usersServiceMocked.add = async (req, res) => {
 };
 
 usersServiceMocked.modify = (req, res) => {
+    users = [
+        {
+            id: 1,
+            username: 'webcampmet',
+            password: 'webcampmet',
+            name: 'webcampmet nombre',
+            age: 32,
+            active: true
+        },
+        {
+            id: 2,
+            username: 'webcampmet2',
+            password: 'webcampmet2',
+            name: 'webcampmet2 nombre',
+            age: 24,
+            active: true
+        },
+        {
+            id: 3,
+            username: 'webcampmet1',
+            password: 'webcampmet1',
+            name: 'webcampmet1 nombre',
+            age: 16,
+            active: true
+        }
+    ];
     try {
         console.log('+++++++++++++++++++++++++++++++++++');
         console.log('body', req.body);
@@ -51,6 +82,20 @@ usersServiceMocked.modify = (req, res) => {
 }
 
 usersServiceMocked.get = (req, res) => {
+    console.log('req.query', req.query)
+    let limit;
+    if(req.query.limit)
+     limit = +req.query.limit;
+    console.log('limit', limit)
+    if(limit != undefined && limit != null  && limit != 0)
+    {
+        console.log('entró', limit)
+        const usuariosFiltrados = users.splice(0, limit);
+        res.json(usuariosFiltrados);
+        return;
+    }
+    console.log('limit', limit)
+    // localhost:8080/users?limit=2
     res.json(users);
     // HACER parte con filtros: limit
 }

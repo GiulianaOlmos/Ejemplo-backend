@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const router = Router();
+// SIN BD
 const {
     add,     
     get,
@@ -8,7 +9,12 @@ const {
     deleteUser,
 } = require('../services.mocked/users.mocked.service')
 
-// EJEMPLOS A MOSTRAR
+// CON BD
+const {
+    addUsers
+} = require('../services/users.service')
+
+// cambiar las funciones CON BD si se va probar con  BD
 router.post('/users', add ); // POST: insertar datos, toma datos del BODY
 router.delete('/users', deleteUser); // DELETE: eliminar datos, toma datos del BODY
 router.get('/users/:id', getUser); // GET con params (:id): consultar datos
