@@ -26,5 +26,6 @@ app.set("port", process.env.PORT || 8080);
 // });
 
 app.use(require("./routes/players.routes"));
+app.use(require("./routes/questions.routes"));
 
 module.exports = app;

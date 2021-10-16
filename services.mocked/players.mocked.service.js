@@ -1,7 +1,7 @@
 const players = require('../models.mocked/player.mocked');
 const playersServiceMocked = {};
 
-playersServiceMocked.addPlayer = async (req, res) => {
+playersServiceMocked.add = async (req, res) => {
     try {
         // let {playerName, team, score } = req.body
         console.log('body', req.body);
@@ -22,6 +22,44 @@ playersServiceMocked.addPlayer = async (req, res) => {
     }
 };
 
+playersServiceMocked.modify = (req, res) => {
+    try {
+        // let {playerName, team, score } = req.body
+        console.log('body', req.body);
+        const {id} = req.body;
+        const player = players.find(u => u.id === id);
+        if (!player) // explicar == null == undefined
+            return res.status(400).json({mesaage: 'Invalid player.'});
+        // validaciones de inputs
+        // validaciones de negocio
+        player.team = req.body.team;
+        player.score = req.body.score;
+        console.log('player updated', player);
+        return res.status(201).json();
+    } catch (e) {
+        return res.status(400);
+    }
+};
+
+playersServiceMocked.get = (req, res) => {
+    return res.status(200).json([players]);
+};
+
+playersServiceMocked.getTop = (req, res) => {
+    console.log('getTop query', req.query);
+    const limit = +req.query.limit;
+    console.log('getTop limit', limit);
+    const playersOrdered = players.sort((p1,p2)=> {
+        {console.log('p2.score', p2.score, 'p1.score', p1.score, 'p2.score - p1.score', p2.score - p1.score); return p2.score - p1.score}
+    });
+    if (!!limit) {
+        return playersServiceMocked.get(req, res);
+    }    
+    const playersFiltered = [].concat(playersOrdered).splice(0, limit);
+    return res.status(200).json(playersFiltered);
+};
+
+
 playersServiceMocked.deletePlayer = (req, res) => {
     try {
         // let {playerName, team, score } = req.body
@@ -41,29 +79,7 @@ playersServiceMocked.deletePlayer = (req, res) => {
     }
 };
 
-playersServiceMocked.getPlayers = (req, res) => {
-    console.log('getPlayer query', req.query);
-    const team = req.query.team;
-    const limit = +req.query.limit;
-    console.log('getplayers team limit', team, limit);
-    console.log(!NaN, limit === NaN, !limit)
-    if(!team && !limit)
-        return res.status(200).json(players);
-    let result = [];
-    // validar valores team
-    if(!!team){
-        const playersFiltered = players.filter(u => u.team === team);
-        if (!!playersFiltered) // explicar == null == undefined
-            result = result.concat(playersFiltered);
-        console.log('playersFiltered', result);
-    }
-    if(!!limit && limit > 0 && result.length > limit){
-        const resultLimited = result.slice(0, limit)
-        result = resultLimited;
-        console.log('playersLimited', result);
-    }
-    return res.status(200).json(result);
-};
+
 
 playersServiceMocked.getPlayer = (req, res) => {
     console.log('getPlayer params', req.params);
@@ -75,22 +91,6 @@ playersServiceMocked.getPlayer = (req, res) => {
     return res.status(200).json(player);
 };
 
-playersServiceMocked.modifyPlayer = (req, res) => {
-    try {
-        // let {playerName, team, score } = req.body
-        console.log('body', req.body);
-        const {id} = req.body;
-        const player = players.find(u => u.id === id);
-        if (!player) // explicar == null == undefined
-            return res.status(400).json({msg: 'Error al editar el jugador'});
-        // validaciones de inputs
-        // validaciones de negocio
-        player.team = req.body.team;
-        console.log('player', player);
-        return res.status(201).json();
-    } catch (e) {
-        return res.status(400);
-    }
-};
+
 
 module.exports = playersServiceMocked;

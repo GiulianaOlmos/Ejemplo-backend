@@ -3,13 +3,13 @@ const players = [
         id: 1,
         playerName: 'playerName2',
         team: 'blue',
-        score: 1
+        score: 10
     },
     {
         id: 2,
         playerName: 'playerName2',
         team: 'blue',
-        score: 1
+        score: 23
     },
     {
         id: 3,
@@ -21,13 +21,13 @@ const players = [
         id: 4,
         playerName: 'playerName4',
         team: 'red',
-        score: 1
+        score: 34
     },
     {
         id: 5,
         playerName: 'playerName5',
         team: 'red',
-        score: 1
+        score: 8
     }
 ];
 
