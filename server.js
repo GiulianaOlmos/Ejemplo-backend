@@ -25,6 +25,7 @@ app.set("port", process.env.PORT || 8080);
 //   res.send("Amiga, funciona, fuaaaa");
 // });
 
+// crear un route/service de cero
 app.use(require("./routes/users.routes"));
 
 module.exports = app;

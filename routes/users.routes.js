@@ -1,14 +1,16 @@
 const { Router } = require('express');
 const router = Router();
 const {
-    addUsers, 
+    add,     
+    get,
+    getUser,
+    modify,
     deleteUser,
-    getUsers,
-    modifyUser
 } = require('../services.mocked/users.mocked.service')
 
-router.post('/users', addUsers );
+router.post('/users', add );
 router.delete('/users', deleteUser);
-router.get('/users', getUsers);
-router.put('/users', modifyUser);
+router.get('/users/:id', getUser);
+router.get('/users', get);
+router.put('/users', modify);
 module.exports = router;
