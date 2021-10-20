@@ -2,10 +2,11 @@ const mongoose = require('mongoose');
 
 let Schema = mongoose.Schema
 
-let user = new Schema({
+let player = new Schema({
     playerName: {
         type: String,
-        required: [true, 'playerName is required']
+        required: [true, 'playerName is required'],
+        unique: true
     },
     team: {
         type: String,
@@ -17,4 +18,4 @@ let user = new Schema({
     }
 })
 
-module.exports = mongoose.model('User', user)
+module.exports = mongoose.model('Player', player)
