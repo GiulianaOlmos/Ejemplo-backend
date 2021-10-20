@@ -4,17 +4,17 @@ const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
-// mongoose.connect(
-//   'mongodb+srv://newUser:123ronco@game.cxct1.mongodb.net/game?retryWrites=true&w=majority',
-//   {useNewUrlParser: true, useUnifiedTopology: true },
-//   (err, res) => {
-//     if (err) {
-//       throw err;
-//     } else {
-//       console.log("baseOnline");
-//     }
-//   }
-// );
+ mongoose.connect(
+   'mongodb+srv://LaGiuli:Giuli1234@cluster0.jdzap.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+   {useNewUrlParser: true, useUnifiedTopology: true },
+   (err, res) => {
+     if (err) {
+       throw err;
+     } else {
+       console.log("baseOnline");
+     }
+   }
+ );
 
 app.use(cors());
 app.use(bodyParser.json())

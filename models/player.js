@@ -5,7 +5,8 @@ let Schema = mongoose.Schema
 let player = new Schema({
     playerName: {
         type: String,
-        required: [true, 'playerName is required']
+        required: [true, 'playerName is required'],
+        unique: true
     },
     team: {
         type: String,
